@@ -1,0 +1,101 @@
+﻿@model PagingResultsViewModel<ProductViewModel>
+@{
+    var nextValue = Model.CurrentPage + 1;
+    var prevValue = Model.CurrentPage - 1;
+}
+<h1>Products</h1>
+<hr />
+
+<a class="btn btn-primary" asp-controller="Product" asp-action="Create">Add New</a>
+<form asp-controller="Product" asp-action="index" method="get">
+    <div class="row">
+        <div class="col-md-4">
+            <input name="searchKey" value="@ViewBag.searchKey" class="form-control" placeholder="Search..." />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" class="btn btn-primary" value="Search" />
+
+        </div>
+    </div>
+</form>
+@if (Model.Data.Any())
+{
+     
+
+    <br />
+    <table class="table table-hover">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Update</th>
+            <th>Delete</th>
+     
+        </tr>
+        @foreach (var product in Model.Data)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>
+                    <img src="~/Images/@product.ImageUrl" alt="@product.Name" width="200" />
+                </td>
+                <td>@product.Price</td>
+                <td>
+                    <a class="btn btn-warning" href="~/Product/Update/@product.Id">Update</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" href="~/Product/Delete/@product.Id">Delete</a>
+
+                </td>
+          
+
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">
+        No Products Available At The Moment
+    </div>
+}
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @if (Model.CurrentPage == 1)
+        {
+            <li class="page-item disabled"><a class="page-link" href="~/Category/index?page=@prevValue">Previous</a></li>
+
+        }
+        else
+        {
+            <li class="page-item"><a class="page-link" href="~/Category/index?page=@prevValue">Previous</a></li>
+
+        }
+        @for (int i = 1; i <= Model.NumberOfPages; i++)
+        {
+            if (i == Model.CurrentPage)
+            {
+                <li class="page-item active"><a class="page-link" href="~/Category/index?page=@i">@i</a></li>
+
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" href="~/Category/index?page=@i">@i</a></li>
+
+            }
+        }
+        @if (Model.NumberOfPages == Model.CurrentPage)
+        {
+            <li class="page-item disabled"><a class="page-link" href="~/Category/index?page=@nextValue">Next</a></li>
+
+        }
+
+        else
+        {
+            <li class="page-item"><a class="page-link" href="~/Category/index?page=@nextValue">Next</a></li>
+
+        }

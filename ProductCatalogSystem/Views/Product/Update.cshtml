@@ -1,0 +1,42 @@
+﻿@model UpdateProductViewModel
+<h1>Update Product</h1>
+<hr>
+<form asp-action="Update" enctype="multipart/form-data">
+    <input  asp-for="Id" type="hidden">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="form-control">Product Name</label>
+                <input required asp-for="Name" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="form-control">Product Description</label>
+                <input required asp-for="Description" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="form-control">Product Image</label>
+                <input type="file" asp-for="NewImage" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="form-control">Product Price</label>
+                <input required asp-for="Price" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="form-control">Product Category ID</label>
+                <select required asp-for="CategoryId" asp-items="ViewBag.categoryList" class="form-control">
+                </select>
+            </div>
+        </div>
+    </div>
+    <br />
+<input class="btn btn-primary" type="submit" value="Save">
+    <a asp-controller="Product" asp-action="Index" class="btn btn-danger">Back</a>
+</form>

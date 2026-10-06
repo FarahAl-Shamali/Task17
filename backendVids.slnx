@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="lect3.1vid/lect3.1vid.csproj" Id="18a5e641-12f9-444e-9364-60181d1cd5b1" />
+  <Project Path="newProj/newProj.csproj" Id="0e3c3d9f-e6f1-4d47-befb-a82c09d65a13" />
+  <Project Path="ProductCatalogSystem/ProductCatalogSystem.csproj" Id="51b70cf3-0523-449c-a72f-937c11851655" />
+</Solution>
