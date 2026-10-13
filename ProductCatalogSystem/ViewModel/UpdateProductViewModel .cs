@@ -10,6 +10,7 @@ namespace ProductCatalogSystem.ViewModel
         public string Description { get; set; }
         public float Price { get; set; }
         public int CategoryId { get; set; }
+        public int BrandId { get; set; }
         public IFormFile? NewImage { get; set; }     
         public string? CurrentImage { get; set; }
     }

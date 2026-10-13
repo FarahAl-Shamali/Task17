@@ -1,0 +1,42 @@
+﻿@model List<ReviewViewModel>
+
+<h1>Product Reviews</h1>
+<br />
+<hr />
+<a class="btn btn-primary" asp-action="Create" asp-controller="Review" asp-route-productId="@ViewBag.productId">Add Review</a>
+@if(Model.Any()){
+    <br />
+    <table class="table table-hover">
+        <tr>
+           
+            <th>Description</th>
+            <th>Rating</th>
+            <th>Created At</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        @foreach (var review in Model)
+        {
+            <tr>
+               
+                <td>@review.Description</td>
+                <td>@review.Rating</td>
+                <td>@review.CreatedAt</td>
+              
+                    <td>
+                        <a class="btn btn-warning" href="~/Review/Update/@review.Id">Update</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" href="~/Review/Delete/@review.Id">Delete</a>
+                    </td>
+                
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">
+        No Reviews Available At The Moment
+    </div>
+}

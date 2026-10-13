@@ -1,0 +1,38 @@
+﻿@model List<BrandViewModel>
+<h1>Brands</h1>
+<br>
+<hr>
+<a class="btn btn-primary" asp-controller="Brand" asp-action="Create">Add New</a>
+@if (Model.Any())
+{
+    <br />
+    <table class="table table-hover">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+        @foreach (var brand in Model)
+        {
+            <tr>
+                <td>@brand.Id</td>
+                <td>@brand.Name</td>
+                <td>
+                    <a class="btn btn-warning" href="~/Brand/Update/@brand.Id">Update</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" href="~/Brand/Delete/@brand.Id">Delete</a>
+
+                </td>
+
+               
+
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">
+        No Brands Available
+    </div>
+}

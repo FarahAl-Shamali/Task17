@@ -35,6 +35,13 @@
                 </select>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="form-control">Product Brand ID</label>
+                <select required asp-for="BrandId" asp-items="ViewBag.BrandList" class="form-control">
+                </select>
+            </div>
+        </div>
     </div>
     <br />
 <input class="btn btn-primary" type="submit" value="Save">

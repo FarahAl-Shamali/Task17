@@ -25,6 +25,7 @@ namespace ProductCatalogSystem.Controllers
         public IActionResult Create()
         {
             ViewData["categoryList"] =new SelectList(_db.Categories.Where(x=> !x.IsDelete).ToList(),"Id","Name");
+            ViewData["BrandList"] =new SelectList(_db.Brands.Where(x => !x.IsDelete).ToList(),"Id","Name");
             return View();
         }
         [HttpPost]
@@ -44,6 +45,7 @@ namespace ProductCatalogSystem.Controllers
                 product.CreatedAt = DateTime.Now;
                 product.Price = input.Price;
                 product.CategoryId = input.CategoryId;
+                product.BrandId = input.BrandId;
                 if (input.ImageUrl != null)
                 {
                     product.ImageUrl = await _fileService.SaveFile(input.ImageUrl, "Images");
@@ -58,13 +60,16 @@ namespace ProductCatalogSystem.Controllers
                 TempData["msg"] = "s:Product added successfuly";
                 return RedirectToAction("Index");
             }
-           
             ViewData["categoryList"] = new SelectList(_db.Categories.Where(x => !x.IsDelete).ToList(), "Id", "Name");
+            ViewData["BrandList"] = new SelectList(_db.Brands.Where(x => !x.IsDelete).ToList(), "Id", "Name");
+
             return View(input);
         }
         public async Task<IActionResult> Index(int page = 1, string? searchKey = null)
         {
-            var query = _db.Products.Include(x => x.Category).Where(x => !x.IsDelete);
+            var query = _db.Products.Include(x => x.Category)
+             
+                .Where(x => !x.IsDelete);
 
             if (!string.IsNullOrWhiteSpace(searchKey))
             {
@@ -88,6 +93,7 @@ namespace ProductCatalogSystem.Controllers
                 productView.Description = product.Description;
                 productView.Price = product.Price;        
                 productView.CategoryId = product.CategoryId;
+                productView.BrandId = product.BrandId;
                 productView.ImageUrl = product.ImageUrl;
                 productVM.Add(productView);
             }
@@ -122,7 +128,9 @@ namespace ProductCatalogSystem.Controllers
             vm.Description = product.Description;
             vm.CurrentImage = product.ImageUrl;
             vm.Price = product.Price;
+
             ViewData["categoryList"] = new SelectList(_db.Categories.Where(x => !x.IsDelete).ToList(), "Id", "Name");
+            ViewData["BrandList"] = new SelectList(_db.Brands.ToList(), "Id", "Name");
             return View(vm);
         }
         [HttpPost]
@@ -149,6 +157,7 @@ namespace ProductCatalogSystem.Controllers
                 return RedirectToAction("Index");
             }
             ViewData["categoryList"] = new SelectList(_db.Categories.Where(x => !x.IsDelete).ToList(), "Id", "Name");
+            ViewData["BrandList"] = new SelectList(_db.Brands.Where(x => !x.IsDelete).ToList(), "Id", "Name");
 
             return View(input);
         } 

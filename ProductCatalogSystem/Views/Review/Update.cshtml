@@ -1,0 +1,27 @@
+﻿@model UpdateReviewViewModel
+<h1>Update Review</h1>
+<hr>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Update">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ProductId" />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="form-control">Review</label>
+                <input required asp-for="Description" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="form-control">Rating</label>
+                <input required asp-for="Rating" type="number" min="1" max="5" class="form-control">
+            </div>
+        </div>
+    </div>
+    <br />
+    <input class="btn btn-primary" type="submit" value="Save">
+    <a asp-controller="Review" asp-action="Index" asp-route-productId="@Model.ProductId" class="btn btn-danger">Back</a></form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

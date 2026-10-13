@@ -12,5 +12,8 @@ namespace ProductCatalogSystem.Models
         public string ImageUrl { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public int BrandId { get; set; }
+        public Brand Bradn { get; set; }
+        public List<Review> Reviews { get; set; }
     }
 }

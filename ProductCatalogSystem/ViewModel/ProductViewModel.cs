@@ -11,5 +11,6 @@ namespace ProductCatalogSystem.ViewModel
         public float Price { get; set; }
         public string ImageUrl { get; set; }
         public int CategoryId { get; set; }
+        public int BrandId { get; set; }
     }
 }
